@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<script lang="ts"
+import { onMount } from "Svelte";
+import axios from "axios";
+import { Card,
+CardBody,
+CardFooter, 
+CardHeader,
+CardSubtitle, 
+CardText, 
+CardTitle} from "sveltestrap"; >
+
+
+
+const endpoint = "https://jsonplaceholder.typicode.com/users";
+
+interface Company{
+	name:String
+	catchPhrase:string;
+	bs:string
+}
+
+interface User{
+	id: number;
+	name: string;
+	email: string 
+	company:Company;
+
+}
+
+let values: User[] = [];
+
+onMount(async function () {
+	const response = await axios.get(endpoint);
+	console.log(response.data);
+	values = response.data;
+
+});
+
+</script>
+
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
